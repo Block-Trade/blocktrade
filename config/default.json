@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://tejas:Tejas@123@contactkeeper-6dufb.mongodb.net/<dbname>?retryWrites=true&w=majority",
+    "jwtSecret":"secret"
+}
