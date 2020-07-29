@@ -1,4 +1,4 @@
 {
-    "mongoURI": "mongodb+srv://tejas:Tejas@123@contactkeeper-6dufb.mongodb.net/<dbname>?retryWrites=true&w=majority",
+    "mongoURI": "mongodb+srv://tejas:Tejas@123@cluster0.xdpgr.mongodb.net/blocktrade?retryWrites=true&w=majority",
     "jwtSecret":"secret"
 }

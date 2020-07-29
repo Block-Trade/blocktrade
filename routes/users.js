@@ -2,9 +2,19 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const User = require('../models/User');
+const Token = require('../models/VerToken');
 const { check, validationResult } = require('express-validator/check');
 const config = require('config');
 const jwt = require('jsonwebtoken');
+const sendMail = require('../sendgrid-mail');
+
+const mailgun = require("mailgun-js");
+var nodemailer = require('nodemailer');
+
+
+const DOMAIN = 'sandboxefedb69044e4441db6c4780d20a57f4e.mailgun.org';
+const api_key = "6e5ec6ebdccdcc6832bb152e975451b7-a65173b1-b16dc40f"
+const mg = mailgun({apiKey: api_key, domain: DOMAIN});
 
 router.post('/', [
     check('name','Please enter name').not().isEmpty(),
@@ -33,21 +43,22 @@ router.post('/', [
 
         const salt = await bcrypt.genSalt(10);
         user.password = await bcrypt.hash(password, salt);
-
-        await user.save();
-
         const payload = {
             user : {
                 id: user.id
             }
         };
 
-        jwt.sign(payload, config.get('jwtSecret'), {
+        const token = jwt.sign({name, email, password}, config.get('jwtSecret'), {
             expiresIn:3600
-        },(err, token) => {
-            if(err) throw err;
-            res.json({token});
         });
+    
+        const mailCont = {
+            email,
+            token
+        }
+        sendMail(mailCont);
+        res.json({message: 'Mail sent successfully'});
 
     } catch(err) {
         console.error(err.message);

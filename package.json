@@ -11,13 +11,20 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@sendgrid/mail": "^7.2.2",
     "bcryptjs": "^2.4.3",
     "concurrently": "^5.2.0",
     "config": "^3.3.1",
+    "crypto": "^1.0.1",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-validator": "^6.6.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.9.25",
+    "mailgun-js": "^0.22.0",
+    "mongodb": "^3.5.9",
+    "mongoose": "^5.9.26",
+    "nodemailer": "^6.4.10",
+    "nodemailer-sendgrid-transport": "^0.2.0",
     "nodemon": "^2.0.4"
   }
 }
