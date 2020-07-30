@@ -32,16 +32,15 @@ router.post('/', [
             email,
             password
         });
-
+        
         const salt = await bcrypt.genSalt(10);
         user.password = await bcrypt.hash(password, salt);
-        const payload = {
-            user : {
-                id: user.id
-            }
-        };
-
-        const token = jwt.sign({name, email, password}, process.env.JWTSECRET, {
+        const payload= {
+           name,
+           email,
+           password:user.password 
+        }
+        const token = jwt.sign(payload, process.env.JWTSECRET, {
             expiresIn:3600
         });
     
