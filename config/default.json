@@ -1,4 +1,0 @@
-{
-    "mongoURI": "mongodb+srv://tejas:Tejas@123@cluster0.xdpgr.mongodb.net/blocktrade?retryWrites=true&w=majority",
-    "jwtSecret":"secret"
-}
