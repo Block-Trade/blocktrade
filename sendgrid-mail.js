@@ -4,7 +4,7 @@ sgMail.setApiKey('SG.ivmSse_PTIeDFIwm9znnZQ.FEV2Sim5CBC51r0vPvQUxnLamIQaMWFo7PYa
 const sendMail = async (mailCont) => {
     const msg = {
         to: mailCont.email,
-        from: 'tejasdahad000@gmail.com',
+        from: 'karankangude17@gmail.com',
         subject: 'Account Activation',
         html: `
         <h2>Please click on given link to activate your account</h2>

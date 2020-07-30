@@ -1,6 +1,7 @@
-const config = require('config');
+const dotenv = require('dotenv');
+dotenv.config();
 const mongoose = require('mongoose');
-const db = config.get("mongoURI");
+const db = process.env.MONGOURI;
 
 /*const MongoClient = require('mongodb').MongoClient;
 const client = new MongoClient(db, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -24,13 +25,14 @@ const connectDB = async () => {
         await mongoose.connect(db,{
             useNewUrlParser:true,
             useCreateIndex:true,
-            useFindAndModify:false
+            useFindAndModify:false,
+            useUnifiedTopology:true
         });
         console.log("MongoDB connected");
     } catch (err) {
         console.error(err);
         process.exit(1);
-    }
+    }                                                                                                                                                                                                                                                                                               
 }
 
 module.exports = connectDB;

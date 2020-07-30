@@ -3,10 +3,11 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 const { check, validationResult } = require('express-validator/check');
-const config = require('config');
+const dotenv = require('dotenv');
 const jwt = require('jsonwebtoken');
 const auth = require('../middleware/auth');
 
+dotenv.config();
 router.get('/', auth, async (req, res) => {
     try {
         const user = await User.findById(req.user.id).select('-password');
@@ -48,7 +49,7 @@ router.post('/',[
             }
         };
 
-        jwt.sign(payload, config.get('jwtSecret'), {
+        jwt.sign(payload, process.env.JWTSECRET, {
             expiresIn:3600
         },(err, token) => {
             if(err) throw err;
