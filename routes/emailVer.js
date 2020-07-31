@@ -1,15 +1,15 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const config = require('config');
 const User = require('../models/User');
 const router = express.Router();
-
+const dotenv = require('dotenv');
+dotenv.config();
 router.post('/', async (req, res) => {
     const {token } = req.body;
 
     if(token) {
         try{
-        const decoded = jwt.verify(token, config.get('jwtSecret'));
+        const decoded = jwt.verify(token, process.env.JWTSECRET);
         if(decoded) {
             const {name, email, password} = decoded;
             var user = await User.findOne({email});
