@@ -11,8 +11,8 @@ app.use(express.json({extended:false}));
 app.get('/',(req, res) => {
     res.json({ msg: 'Hello' });
 })
-app.use('/api/users', require('./routes/users'));
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/activate', require('./routes/emailVer'));
+app.use('/signup', require('./routes/users'));
+app.use('/login', require('./routes/auth'));
+app.use('/activate', require('./routes/emailVer'));
 
 app.listen(PORT,() => console.log(`Server started on port ${PORT}`));
