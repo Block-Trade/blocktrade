@@ -11,13 +11,14 @@ router.post('/', async (req, res) => {
         try{
         const decoded = jwt.verify(token, process.env.JWTSECRET);
         if(decoded) {
-            const {name, email, password} = decoded;
+            const {name,username, email, password} = decoded;
             var user = await User.findOne({email});
             if(user) {
                 return res.json({ message: 'User already exists' });
             }
             user = new User({
                 name,
+                username,
                 email,
                 password
             });

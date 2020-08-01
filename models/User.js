@@ -1,9 +1,15 @@
 const mongoose = require('mongoose');
+const { ObjectId } = require('mongodb');
 
 const UserSchema = mongoose.Schema({
     name: {
         type: String,
         required: true
+    },
+    username: {
+        type: String,
+        required:true,
+        unique:true
     },
     email: {
         type:String,
@@ -13,6 +19,14 @@ const UserSchema = mongoose.Schema({
     password: {
         type:String,
         required:true
+    },
+    kycVerfiedThrough: {
+        type: String,
+        default:'',
+    },
+    kycStatus:{
+        type: Boolean,
+        default:false
     }
 });
 

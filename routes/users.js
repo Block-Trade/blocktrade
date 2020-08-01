@@ -10,6 +10,7 @@ const sendMail = require('../sendgrid-mail');
 dotenv.config();
 router.post('/', [
     check('name','Please enter name').not().isEmpty(),
+    check('username','Please enter username').not().isEmpty(),
     check('email','Please enter email').isEmail(),
     check('password','Please enter password of min 5 letters').isLength({min:5})
 ],async (req, res) => {
@@ -19,16 +20,20 @@ router.post('/', [
         return res.status(400).json({errors: errors.array()});
     }
 
-    const { name, email, password } = req.body;
+    const { name,username, email, password } = req.body;
     try {
         let user = await User.findOne({ email });
-
+        let user1 = await User.findOne({ username });
         if(user) {
-            return res.status(400).json({msg: 'user already exists'});
+            return res.status(400).json({msg: 'email already in use!'});
         }
-
+        if(user1) {
+            return res.status(400).json({msg: 'username already in use!'});
+        }
+        
         user = new User({
             name,
+            username,
             email,
             password
         });
@@ -37,6 +42,7 @@ router.post('/', [
         user.password = await bcrypt.hash(password, salt);
         const payload= {
            name,
+           username,
            email,
            password:user.password 
         }

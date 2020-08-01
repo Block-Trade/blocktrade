@@ -8,7 +8,7 @@ const sendMail = async (mailCont) => {
         subject: 'Account Activation',
         html: `
         <h2>Please click on given link to activate your account</h2>
-        <p>http://localhost:3000/authenticate/activate/${mailCont.token}</p>
+        <p>${mailCont.token}</p>
         `
     };
     console.log('Sending mail');
