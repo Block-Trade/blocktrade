@@ -20,7 +20,7 @@ const UserSchema = mongoose.Schema({
         type:String,
         required:true
     },
-    kycVerfiedThrough: {
+    kycVerifiedThrough: {
         type: String,
         default:'',
     },
