@@ -1,16 +1,7 @@
-// const express = require('express');
-// const router = express.Router();
-
-// router.get('/',(req,res)=>{
-//     res.json({msg:"KYC"});
-// })
-
-// module.exports = router;
-
 const express = require('express');
 const { check, validationResult } = require('express-validator');
 const router = express.Router();
-const Dl = require('../models/Kyc_dl');
+const Dl = require('../models/kyc_dl');
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
