@@ -14,5 +14,5 @@ app.get('/',(req, res) => {
 app.use('/signup', require('./routes/users'));
 app.use('/login', require('./routes/auth'));
 app.use('/activate', require('./routes/emailVer'));
-
+app.use('/kyc',require('./routes/kyc'));
 app.listen(PORT,() => console.log(`Server started on port ${PORT}`));

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { ObjectId } = require('mongodb');
 
 const UserSchema = mongoose.Schema({
     name: {
@@ -18,6 +19,11 @@ const UserSchema = mongoose.Schema({
     password: {
         type:String,
         required:true
+    },
+    kyc: {
+        type: ObjectId,
+        ref: 'dl',
+        default: null
     }
 });
 

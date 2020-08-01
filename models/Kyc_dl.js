@@ -1,0 +1,15 @@
+const mongoose = require('mongoose');
+
+const dlSchema = mongoose.Schema({
+    cc: {
+        type: String,
+        required: true
+    },
+    dl_no : {
+        type: String,
+        required: true,
+        unique:true
+    }
+});
+
+module.exports = mongoose.model('dl', dlSchema);
