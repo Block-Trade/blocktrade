@@ -20,10 +20,13 @@ const UserSchema = mongoose.Schema({
         type:String,
         required:true
     },
-    kyc: {
-        type: ObjectId,
-        ref: 'dl',
-        default: null
+    kycVerfiedThrough: {
+        type: String,
+        default:'',
+    },
+    kycStatus:{
+        type: Boolean,
+        default:false
     }
 });
 

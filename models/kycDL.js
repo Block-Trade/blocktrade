@@ -9,6 +9,11 @@ const dlSchema = mongoose.Schema({
         type: String,
         required: true,
         unique:true
+    },
+    userAssc:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'user',
+        default:null
     }
 });
 
