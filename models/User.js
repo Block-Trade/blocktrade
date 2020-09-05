@@ -20,6 +20,10 @@ const UserSchema = mongoose.Schema({
         type:String,
         required:true
     },
+    mobileNo: {
+        type: String,
+        default: '',
+    },
     kycVerifiedThrough: {
         type: String,
         default:'',
@@ -27,6 +31,30 @@ const UserSchema = mongoose.Schema({
     kycStatus:{
         type: Boolean,
         default:false
+    },
+    companyName: {
+        type: String,
+        default:'',
+    },
+    companyEmail: {
+        type: String,
+        default:'',
+    },
+    companyAddress: {
+        type: String,
+        default:'',
+    },
+    companyTelNo: {
+        type: String,
+        default: '',
+    },
+    city: {
+        type: String,
+        default: ''
+    },
+    country: {
+        type: String,
+        default: ''
     }
 });
 

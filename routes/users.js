@@ -20,22 +20,26 @@ router.post('/', [
         return res.status(400).json({errors: errors.array()});
     }
 
-    const { name,username, email, password } = req.body;
+    const { name,username, email, password, mobileNo } = req.body;
     try {
-        let user = await User.findOne({ email });
-        let user1 = await User.findOne({ username });
-        if(user) {
+        let userEmail = await User.findOne({ email });
+        let userName = await User.findOne({ username });
+        let userMobileNo = await User.findOne({ mobileNo });
+        if(userEmail) {
             return res.status(400).json({msg: 'email already in use!'});
         }
-        if(user1) {
+        if(userName) {
             return res.status(400).json({msg: 'username already in use!'});
         }
-        
+        if(userMobileNo) {
+            return res.status(400).json({msg: 'MobileNo already in use!'});
+        }
         user = new User({
             name,
             username,
             email,
-            password
+            password,
+            mobileNo
         });
         
         const salt = await bcrypt.genSalt(10);
@@ -44,7 +48,8 @@ router.post('/', [
            name,
            username,
            email,
-           password:user.password 
+           password:user.password,
+           mobileNo
         }
         const token = jwt.sign(payload, process.env.JWTSECRET, {
             expiresIn:3600
@@ -55,7 +60,7 @@ router.post('/', [
             token
         }
         sendMail(mailCont);
-        res.json({msg: 'Mail sent successfully'});
+        res.json({message: 'Mail sent successfully'});
 
     } catch(err) {
         console.error(err.message);

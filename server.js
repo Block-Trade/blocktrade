@@ -17,5 +17,5 @@ app.use('/activate', require('./routes/emailVer'));
 app.use('/kyc',require('./routes/kyc'));
 app.use('/forgotpass',require('./routes/forgotPass'));
 app.use('/resetpass',require('./routes/resetPass'));
-
+app.use('/companyInfo',require('./routes/companyInfo'));
 app.listen(PORT,() => console.log(`Server started on port ${PORT}`));

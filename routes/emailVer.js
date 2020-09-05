@@ -11,7 +11,7 @@ router.post('/', async (req, res) => {
         try{
         const decoded = jwt.verify(token, process.env.JWTSECRET);
         if(decoded) {
-            const {name,username, email, password} = decoded;
+            const {name,username, email, password,mobileNo} = decoded;
             var user = await User.findOne({email});
             if(user) {
                 return res.status(400).json({ msg: 'User already exists' });
@@ -20,7 +20,8 @@ router.post('/', async (req, res) => {
                 name,
                 username,
                 email,
-                password
+                password,
+                mobileNo
             });
 
             await user.save();

@@ -7,6 +7,11 @@
     "start": "node server.js",
     "server": "nodemon server.js"
   },
+  "nodemonConfig": {
+    "watch": [
+      "server"
+    ]
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
