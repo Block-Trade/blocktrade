@@ -10,9 +10,12 @@ app.use(express.json({extended:false}));
 
 app.get('/',(req, res) => {
     res.json({ msg: 'Hello' });
-})
+});
 app.use('/signup', require('./routes/users'));
 app.use('/login', require('./routes/auth'));
 app.use('/activate', require('./routes/emailVer'));
 app.use('/kyc',require('./routes/kyc'));
+app.use('/forgotpass',require('./routes/forgotPass'));
+app.use('/resetpass',require('./routes/resetPass'));
+
 app.listen(PORT,() => console.log(`Server started on port ${PORT}`));

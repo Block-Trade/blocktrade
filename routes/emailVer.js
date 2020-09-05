@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
             const {name,username, email, password} = decoded;
             var user = await User.findOne({email});
             if(user) {
-                return res.json({ message: 'User already exists' });
+                return res.status(400).json({ msg: 'User already exists' });
             }
             user = new User({
                 name,
@@ -25,18 +25,18 @@ router.post('/', async (req, res) => {
 
             await user.save();
 
-            res.json({message : 'Signup successful'});
+            res.json({msg : 'Signup successful'});
         
 
         } else {
-            return res.json({ message: 'Expired or invalid token' });
+            return res.status(400).json({ msg: 'Expired or invalid token' });
         }
     } catch (err) {
-        return res.json({message: 'Invalid signature or token'});
+        return res.status(401).json({msg: 'Invalid signature or token'});
     }
         
     } else {
-        return res.json({ message: 'No token present'});
+        return res.status(400).json({ msg: 'No token present'});
     }
 });
 

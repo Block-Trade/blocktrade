@@ -55,7 +55,7 @@ router.post('/', [
             token
         }
         sendMail(mailCont);
-        res.json({message: 'Mail sent successfully'});
+        res.json({msg: 'Mail sent successfully'});
 
     } catch(err) {
         console.error(err.message);
