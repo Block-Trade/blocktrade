@@ -6,16 +6,18 @@ const app = express();
 
 connectDB();
 
-app.use(express.json({extended:false}));
+app.use(express.json({ extended: false }));
 
-app.get('/',(req, res) => {
-    res.json({ msg: 'Hello' });
+app.get('/', (req, res) => {
+  res.json({ msg: 'Hello' });
 });
 app.use('/signup', require('./routes/users'));
 app.use('/login', require('./routes/auth'));
 app.use('/activate', require('./routes/emailVer'));
-app.use('/kyc',require('./routes/kyc'));
-app.use('/forgotpass',require('./routes/forgotPass'));
-app.use('/resetpass',require('./routes/resetPass'));
-app.use('/companyInfo',require('./routes/companyInfo'));
-app.listen(PORT,() => console.log(`Server started on port ${PORT}`));
+app.use('/kyc', require('./routes/kyc'));
+app.use('/forgotpass', require('./routes/forgotPass'));
+app.use('/resetpass', require('./routes/resetPass'));
+app.use('/companyInfo', require('./routes/companyInfo'));
+app.use('/tradeid', require('./routes/tradeId'));
+
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
