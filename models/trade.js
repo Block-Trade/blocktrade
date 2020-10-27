@@ -5,7 +5,7 @@ const TradeSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    exporterUsername: {
+    exporterUserName: {
         type: String,
         required:true,
         unique:true
