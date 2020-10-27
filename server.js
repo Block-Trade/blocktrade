@@ -19,5 +19,6 @@ app.use('/forgotpass', require('./routes/forgotPass'));
 app.use('/resetpass', require('./routes/resetPass'));
 app.use('/companyInfo', require('./routes/companyInfo'));
 app.use('/tradeid', require('./routes/tradeId'));
+app.use('/trade', require('./routes/trade'));
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
