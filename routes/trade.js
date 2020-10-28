@@ -40,5 +40,22 @@ router.post('/',auth,async(req,res) => {
     res.status(400).send({e});
   }
 });
-
+router.post('/update',auth,async(req,res) => {
+  try{
+    const { tradeId,tradeStatus } = req.body;
+    const trade =await Trade.findByIdAndUpdate(tradeId,{tradeStatus:tradeStatus});
+    res.status(200).send({trade});
+  }catch(e){
+    res.status(400).send({e});
+  }
+});
+router.post('/delete',auth,async(req,res) => {
+  try{
+    const { tradeId } = req.body;
+    const trade =await Trade.findByIdAndDelete(tradeId);
+    res.status(200).json({ msg: 'Trade deleted successfully' });
+  }catch(e){
+    res.status(400).send({e});
+  }
+});
 module.exports = router;
