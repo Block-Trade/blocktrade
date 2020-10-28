@@ -7,13 +7,11 @@ const TradeSchema = mongoose.Schema({
     },
     exporterUserName: {
         type: String,
-        required:true,
-        unique:true
+        required:true
     },
     importerUserName: {
         type:String,
-        required:true,
-        unique: true
+        required:true
     },
     incoterms: {
         type:String,

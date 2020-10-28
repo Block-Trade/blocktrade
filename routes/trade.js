@@ -12,7 +12,7 @@ router.get('/', auth, async (req, res) => {
     console.log(userId)
     const trade = await Trade.find({$or:[{exporterUserName:userId.username},{importerUserName:userId.username}]});
     console.log(trade);
-    return res.status(200).json({ users: trade });
+    return res.status(200).json({ trades: trade });
   } catch (e) {
     res.status(400).send({ e });
   }
@@ -25,17 +25,17 @@ router.post('/',auth,async(req,res) => {
     var a = expUser+impUser+new Date().getTime();
     const tradeId = crypto.createHash('sha256').update(a).digest('base64');
     console.log(tradeId);
-    const trade = new Trade({
-      TradeId: tradeId,
-      exporterUserName:expUser,
-      importerUserName: impUser,
+    const trade1 = new Trade({
       incoterms:inco,
       dueDate,
       amount,
+      TradeId: tradeId,
+      exporterUserName:expUser,
+      importerUserName: impUser,
       tradeStatus: 'DU'
     });
-    await trade.save();
-    res.status(200).send({trade});
+    await trade1.save();
+    res.status(200).send({trade1});
   }catch(e){
     res.status(400).send({e});
   }
