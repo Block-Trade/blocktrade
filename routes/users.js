@@ -52,7 +52,7 @@ router.post('/', [
            mobileNo
         }
         const token = jwt.sign(payload, process.env.JWTSECRET, {
-            expiresIn:3600
+            expiresIn:43200
         });
     
         const mailCont = {
