@@ -17,9 +17,13 @@ const TradeSchema = mongoose.Schema({
         type:String,
         default:'',
     },
-    dueDate: {
+    paymentType:{
         type: String,
         default:'',
+    },
+    creditPeriod: {
+        type: Number,
+        default:0,
     },
     amount:{
         type: String,

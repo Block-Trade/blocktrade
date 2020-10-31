@@ -20,14 +20,15 @@ router.get('/', auth, async (req, res) => {
 
 router.post('/',auth,async(req,res) => {
   try{
-    const { user, expUser,impUser,inco,dueDate,amount } = req.body;
+    const { user, expUser,impUser,inco,creditPeriod,amount,paymentType } = req.body;
     console.log(new Date().getTime());
     var a = expUser+impUser+new Date().getTime();
     const tradeId = crypto.createHash('sha256').update(a).digest('base64');
     console.log(tradeId);
     const trade1 = new Trade({
       incoterms:inco,
-      dueDate,
+      creditPeriod,
+      paymentType,
       amount,
       TradeId: tradeId,
       exporterUserName:expUser,
