@@ -36,16 +36,16 @@ router.post('/dl',[
         const { token } = req.headers;
 
         if(!token) {
-            return res.json({msg: 'Unauthorized access'});
+            return res.status(400).json({msg: 'Unauthorized access'});
         }
 
         const {cc, dl_no} = req.body;
         let dl = await Dl.findOne({dl_no});
         if(!dl) {
-            return res.json({msg: 'Not valid DL'});
+            return res.status(400).json({msg: 'Not valid DL'});
         }
         if(dl.userAssc){
-            return res.json({msg:'DL already in use!'});
+            return res.status(400).json({msg:'DL already in use!'});
         }
        const decoded = jwt.verify(token, process.env.JWTSECRET);
        const { user } = decoded;
@@ -73,23 +73,23 @@ router.post('/passport',[
         const { token } = req.headers;
 
         if(!token) {
-            return res.json({msg: 'Unauthorized access'});
+            return res.status(400).json({msg: 'Unauthorized access'});
         }
 
         const {cc, passport_no} = req.body;
         let pass = await Pass.findOne({passport_no});
         if(!pass) {
-            return res.json({msg: 'Not valid Passport'});
+            return res.status(400).json({msg: 'Not valid Passport'});
         }
         if(pass.userAssc){
-            return res.json({msg:'Passport already in use!'});
+            return res.status(400).json({msg:'Passport already in use!'});
         }
        const decoded = jwt.verify(token, process.env.JWTSECRET);
        const { user } = decoded;
        let user_ = await Pass.findByIdAndUpdate(pass.id, { userAssc: user.id });
        let user_1 = await User.findByIdAndUpdate(user.id, { kycVerifiedThrough: 'Passport',kycStatus: true  });
 
-        res.json({msg:"KYC done"});
+        res.status(200).json({msg:"KYC done"});
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');
