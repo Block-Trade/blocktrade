@@ -9,9 +9,9 @@ const sendReminderMail = async (mailCont) => {
     text: 'Blocktrade',
     subject: 'Payment Reminder',
     html: `<h3>We kindly remind you about your payment to be done </h3>
-           <p>Trade Id: '${mailCont.tradeId}'</p>
-           <p>Username: '${mailCont.username}'</p>
-           <p>Amount : <b>'${mailCont.amount}'</b></p>`,
+           <p>Trade Id: ${mailCont.tradeId}</p>
+           <p>Username: ${mailCont.username}</p>
+           <p>Amount : <b>${mailCont.amount}</b></p>`,
     substitutions: {
       token: mailCont.token,
     },
