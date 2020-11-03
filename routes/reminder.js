@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 const sendReminderMail = require('../sendgrid-reminder-mail');
 const auth = require('../middleware/auth');
 const Trade = require('../models/trade');
+const trade = require('../models/trade');
 dotenv.config();
 router.post('/', auth, async (req, res) => {
   try {
@@ -24,6 +25,7 @@ router.post('/', auth, async (req, res) => {
     };
     console.log(mailCont);
     sendReminderMail({mailCont});
+    const rep = await Trade.findByIdAndUpdate( tradeRes._id , { rf:true });
     return res.status(200).json({ message: 'Reminder Mail sent successfully' });
 
     

@@ -37,6 +37,10 @@ const TradeSchema = mongoose.Schema({
         type: String,
         default:'',
     },
+    rf: {
+        type: Boolean,
+        default: false
+    }
 });
 
 module.exports = mongoose.model('trade', TradeSchema);
