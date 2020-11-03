@@ -9,10 +9,10 @@ const trade = require('../models/trade');
 dotenv.config();
 router.post('/', auth, async (req, res) => {
   try {
-    const { email, username } = await User.findById(req.body.user.id);
     const { tradeId } = req.body;
     const tradeRes = await Trade.findOne({TradeId:tradeId});
-    
+    const { email, username } = await User.findOne({ username : tradeRes.impUser });
+
     if(!tradeRes){
       return res.status(401).json({message: 'Trade Id is invalid'});
     }
