@@ -11,8 +11,9 @@ router.post('/', auth, async (req, res) => {
   try {
     const { tradeId } = req.body;
     const tradeRes = await Trade.findOne({TradeId:tradeId});
-    const { email, username } = await User.findOne({ username : tradeRes.impUser });
-
+    console.log(tradeRes);
+    const { email, username } = await User.findOne({ username : tradeRes.importerUserName });
+    console.log(email+username);
     if(!tradeRes){
       return res.status(401).json({message: 'Trade Id is invalid'});
     }
