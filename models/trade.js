@@ -13,6 +13,10 @@ const TradeSchema = mongoose.Schema({
         type:String,
         required:true
     },
+    invoiceDate:{
+        type: String,
+        required: true
+    },
     incoterms: {
         type:String,
         default:'',
