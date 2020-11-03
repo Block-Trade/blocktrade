@@ -2,7 +2,7 @@ const sgMail = require('@sendgrid/mail');
 
 sgMail.setApiKey(process.env.SG_SENDGRID_API_KEY.toString());
 sgMail.setSubstitutionWrappers('{{', '}}');
-const sendReminderMail = async (mailCont) => {
+const sendReminderMail = async ({mailCont}) => {
   const msg = {
     to: mailCont.email,
     from: 'karankangude17@gmail.com',
