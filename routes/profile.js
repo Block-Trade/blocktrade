@@ -6,7 +6,56 @@ const dotenv = require('dotenv');
 const jwt = require('jsonwebtoken');
 const upload = require('../middleware/upload');
 const auth = require('../middleware/auth');
+const Grid = require("gridfs-stream");
+const mongoose = require('mongoose');
 
+let gfs;
+
+
+router.post("/user-avatar", [auth,upload.single("img")], async (req, res, err) => {
+  console.log(req.file);
+  //console.log(req.body.user);
+  const token = req.header('token');
+  const decoded = jwt.verify(token, process.env.JWTSECRET);
+
+  await User.updateOne({_id:decoded.user.id},{avatar:req.file.filename});
+  res.send(req.file);
+});
+
+router.get("/", (req, res) => {
+  const conn = mongoose.createConnection(process.env.MONGOURI);
+  console.log(conn);
+  console.log("Trying to connect");
+  
+    gfs = Grid(conn.db, mongoose.mongo);
+    console.log(gfs);
+    gfs.collection("uploads");
+    console.log("Connection Successful");
+    gfs.files.findOne({ filename: 'doctor.jpg' }, (err, file) => {
+      // Check if file
+      if (!file || file.length === 0) {
+        return res.status(404).json({
+          err: "No file exists"
+        });
+      }
+  
+      // Check if image
+      if (file.contentType === "image/jpeg" || file.contentType === "image/png" || file.contentType=== 'image/jpg') {
+        // Read output to browser
+        const readstream = gfs.createReadStream(file.filename);
+        readstream.pipe(res);
+      } else {
+        res.status(404).json({
+          err: "Not an image"
+        });
+      }
+    });
+  conn.once("open", () => {
+    
+  });  
+  
+});
+/*
 router.post('/user-avatar', auth, async (req, res) => {
   try {
     await upload(req, res);
@@ -19,7 +68,7 @@ router.post('/user-avatar', auth, async (req, res) => {
     console.log(error);
     return res.send(`Error when trying upload image: ${error}`);
   }
-});
+});*/
 
 router.post('/edit-profile', async (req, res) => {
   try {

@@ -57,8 +57,8 @@ const UserSchema = mongoose.Schema({
     default: '',
   },
   avatar: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: '',
+    type: String,
+    default: '',
   },
 });
 
