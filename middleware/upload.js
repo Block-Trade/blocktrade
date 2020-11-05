@@ -1,25 +1,41 @@
 const util = require('util');
 const multer = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
+const mongoose =  require('mongoose');
+const Grid = require("gridfs-stream");
+const crypto = require("crypto");
+const User = require('../models/User');
 
-var storage = new GridFsStorage({
-  url: process.env.MONGOURI,
-  options: { useNewUrlParser: true, useUnifiedTopology: true },
-  file: (req, file) => {
-    const match = ['image/png', 'image/jpeg'];
+const conn = mongoose.createConnection(process.env.MONGOURI);
+let gfs;
 
-    if (match.indexOf(file.mimetype) === -1) {
-      const filename = `${Date.now()}-blocktrade-${file.originalname}`;
-      return filename;
-    }
-
-    return {
-      bucketName: 'photos',
-      filename: `${Date.now()}-blocktrade-${file.originalname}`,
-    };
-  },
+conn.once("open", () => {
+  gfs = Grid(conn.db, mongoose.mongo);
+  gfs.collection("uploads");
+  console.log("Connection Successful");
 });
 
-var uploadFile = multer({ storage: storage }).single('file');
-var uploadFilesMiddleware = util.promisify(uploadFile);
-module.exports = uploadFilesMiddleware;
+// Create storage engine
+const storage = new GridFsStorage({
+  url: process.env.MONGOURI,
+  file: (req, file) => {
+    return new Promise((resolve, reject) => {
+      crypto.randomBytes(16, (err, buf) => {
+        if (err) {
+          return reject(err);
+        }
+        
+        const filename = file.originalname;
+        const fileInfo = {
+          filename: filename,
+          bucketName: "uploads"
+        };
+        resolve(fileInfo);
+      });
+    });
+  }
+});
+
+const upload = multer({ storage });
+
+module.exports = upload;

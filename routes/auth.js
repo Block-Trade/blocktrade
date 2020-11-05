@@ -6,7 +6,6 @@ const { check, validationResult } = require('express-validator/check');
 const dotenv = require('dotenv');
 const jwt = require('jsonwebtoken');
 const auth = require('../middleware/auth');
-
 dotenv.config();
 router.get('/', auth, async (req, res) => {
     try {
@@ -23,6 +22,7 @@ router.post('/',[
     check('username','Please enter username').exists(),
     check('password').exists()
 ],async (req, res) => {
+    console.log(FileSchema);
     const errors = validationResult(req);
 
     if(!errors.isEmpty()) {
