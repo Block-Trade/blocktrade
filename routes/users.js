@@ -26,7 +26,7 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { name, username, email, password, mobileNo, walletAddr, privateKey } = req.body;
+    const { name, username, email, password, mobileNo, walletAddr } = req.body;
     try {
       let userEmail = await User.findOne({ email });
       let userName = await User.findOne({ username });
@@ -46,8 +46,7 @@ router.post(
         email,
         password,
         mobileNo,
-        walletAddr,
-        privateKey
+        walletAddr
       });
 
       const salt = await bcrypt.genSalt(10);
@@ -58,8 +57,7 @@ router.post(
         email,
         password: user.password,
         mobileNo,
-        walletAddr,
-        privateKey
+        walletAddr
       };
       const token = jwt.sign(payload, process.env.JWTSECRET, {
         expiresIn: 43200,
