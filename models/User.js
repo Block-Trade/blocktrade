@@ -63,10 +63,6 @@ const UserSchema = mongoose.Schema({
   walletAddr:{
     type: String,
     required:true
-  },
-  privateKey:{
-    type: String,
-    required:true
   }
 });
 
