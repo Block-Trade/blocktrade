@@ -60,6 +60,14 @@ const UserSchema = mongoose.Schema({
     type: String,
     default: '',
   },
+  walletAddr:{
+    type: String,
+    required:true
+  },
+  privateKey:{
+    type: String,
+    required:true
+  }
 });
 
 module.exports = mongoose.model('user', UserSchema);
