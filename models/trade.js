@@ -30,8 +30,8 @@ const TradeSchema = mongoose.Schema({
         default:0,
     },
     amount:{
-        type: String,
-        default:'',
+        type: Number,
+        default:0,
     },
     tradeStatus: {
         type: String,
