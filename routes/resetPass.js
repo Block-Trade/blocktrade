@@ -29,7 +29,7 @@ router.post(
         if (!user_) {
           return res.status(400).json({ msg: 'User not present' });
         }
-        res.json({ msg: 'Reset Successful!!' });
+        res.status(200).json({ msg: 'Reset Successful!!' });
       } else {
         return res.status(400).json({ msg: 'Expired or invalid token' });
       }

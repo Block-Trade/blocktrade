@@ -30,7 +30,7 @@ router.post('/',[check('email','Please enter email').isEmail()],async (req, res)
         });
 
         sendResetMail({email: user.email, token});
-        res.json({msg:'Reset mail sent'});
+        res.status(200).json({msg:'Reset mail sent'});
 
     } catch (err) {
         console.error(err.message);

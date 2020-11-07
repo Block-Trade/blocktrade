@@ -19,7 +19,7 @@ router.post("/user-avatar", [auth,upload.single("img")], async (req, res, err) =
   const decoded = jwt.verify(token, process.env.JWTSECRET);
 
   await User.updateOne({_id:decoded.user.id},{avatar:req.file.filename});
-  res.send(req.file);
+  res.status(200).send(req.file);
 });
 
 router.get("/", (req, res) => {
@@ -99,7 +99,7 @@ router.post('/edit-profile', async (req, res) => {
       const { user } = decoded;
       try {
         const response = await User.findByIdAndUpdate(user.id, userInfo);
-        res.json('User Info saved successfully');
+        res.status(200).json('User Info saved successfully');
       } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error');

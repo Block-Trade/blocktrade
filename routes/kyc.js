@@ -52,7 +52,7 @@ router.post('/dl',[
        let user_ = await Dl.findByIdAndUpdate(dl.id, { userAssc: user.id });
        let user_1 = await User.findByIdAndUpdate(user.id, { kycVerifiedThrough: 'DL',kycStatus: true });
     
-        res.json({msg:"KYC done"});
+        res.status(200).json({msg:"KYC done"});
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');

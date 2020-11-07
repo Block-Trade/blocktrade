@@ -19,7 +19,7 @@ router.post('/',async (req, res) => {
             const {user} = decoded;
             try{
                 const response = await User.findByIdAndUpdate(user.id,companyInfo);
-                res.json('Company Info saved successfully');
+                res.status(200).json('Company Info saved successfully');
             } catch(err) {
                 console.error(err.message);
                 res.status(500).send('Server Error');
