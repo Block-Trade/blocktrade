@@ -18,6 +18,18 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
+router.get('/username',auth,async(req,res) => {
+  try {
+    const user = await User.findOne({username: req.body.username});
+    if(!user){
+      return res.status(400).json({msg:"User not found"});
+    }
+    return res.status(200).json({user});
+  } catch (e) {
+  
+  }
+});
+
 router.post('/',auth,async(req,res) => {
   try{
     const { user, expUser,impUser,inco,creditPeriod,amount,paymentType, invoiceDate } = req.body;
