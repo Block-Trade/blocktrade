@@ -18,7 +18,7 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
-router.get('/username',auth,async(req,res) => {
+router.post('/username',auth,async(req,res) => {
   try {
     const user = await User.findOne({username: req.body.username});
     if(!user){
