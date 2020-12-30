@@ -11,7 +11,7 @@ const sendResetMail = async (mailCont) => {
         html:`<p>Click on link to reset your password. ${mailCont.token}</p>`,
         
     };
-    console.log('Sending mail');
+    console.log('Send mail');
     await sgMail.send(msg);
     console.log('Mail sent');
 }
